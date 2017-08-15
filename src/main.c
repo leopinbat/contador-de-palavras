@@ -9,14 +9,29 @@
 
 int main() {
 
-  char c;
+  char c[2000];/* No caso de uma frase muito grande */
+  int counter = 0, aux = 0, i; /* Ja considerando a ultima palavra */
 
-  c = 1;
+  fgets(c, 2000, stdin); /*Lendo o parametro passado*/
+  //printf("%s", c);
 
-  while (c != '\n') {
-    scanf("%c", &c);
+
+  for(i=0;c[i]!= '\0'; i++ ) {
+        if((c[i] ==' ')&&((c[i +1] !=' ')&&(c[i+1] != '\n'))) {
+        counter++;
+        }
+        if(c[i] == '\n'){
+	counter++;
+        }
+	if(((c[i] == '.')||(c[i] == ',')||(c[i] == '-')) &&((c[i +1] !=' ')&&(c[i+1] != '\n')&&(c[i+1] != '.'))){
+	aux = counter +1;
+        }
+	if(aux>counter){
+        counter = aux;
+        }
   }
 
-  printf("1\n");
+
+  printf("%d\n", counter);
   return 0;
 }
